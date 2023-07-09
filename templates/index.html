@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube downloader</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.8/tailwind.min.css'>
+
+</head>
+<body>
+<div class='container mx-auto h-screen grid grid-rows-1 grid-cols-1 items-center'>
+  <div class='wrapper'>
+    <h1 class='text-center'>Video download</h1>
+
+    <form action="/video" name='video' method='post' class='my-2 mx-auto flex flex-col' style='width: 320px;'>
+
+      {% if video is defined %}
+      <video width="320" height="240" controls>
+        <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
+      </video>
+      {% endif %}
+
+      <input type='text' name='video_url' required class='border-2 border-red-300 h-10 px-2 rounded-lg text-center focus:outline-none focus:border-yellow-300' placeholder='Enter YouTube video URL'>
+      <button class='bg-red-500 mt-2 h-10 rounded-lg text-white font-bold'>Download video</button>
+    </form>
+    <hr class="pb-8"/>
+
+    <h1 class='text-center'>Playlist download</h1>
+
+    <form action="/playlist" name='playlist' method='post' class='my-2 mx-auto flex flex-col' style='width: 320px;'>
+
+      {% if downloaded_video is defined %}
+
+        {% for video in downloaded_video %}
+
+          <video width="320" height="240" controls>
+            <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
+          </video>
+
+        {% endfor %}
+
+      {% endif %}
+
+      <input type='text' name='playlist_url' required class='border-2 border-blue-300 h-10 px-2 rounded-lg text-center focus:outline-none focus:border-yellow-300' placeholder='Type your login'>
+      <button class='bg-blue-500 mt-2 h-10 rounded-lg text-white font-bold'>Download playlist</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
