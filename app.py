@@ -19,11 +19,8 @@ def video_downloader():
         video_url = request.form.get('video_url')
 
         if video_url:
-            download_started_at = datetime.now()
 
             video = download_video(video_url)
-
-            download_ended_at = datetime.now()
 
             if video:
                 return render_template('index.html', video=video)
