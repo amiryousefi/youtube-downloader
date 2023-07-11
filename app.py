@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template
 from datetime import datetime
 from pytube import YouTube, Playlist
 from pytube.exceptions import AgeRestrictedError
