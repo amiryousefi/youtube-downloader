@@ -29,8 +29,6 @@ def video_downloader():
 
         return "Invalid data", 422
 
-    return 'Nothing', 422
-
 
 @app.route('/playlist', methods=['GET', "POST"])
 def playlist_downloader():
