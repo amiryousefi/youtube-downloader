@@ -43,23 +43,23 @@ def playlist_downloader():
 
         playlist_video_urls = playlist.video_urls
 
-        downloaded_video = []
+        downloaded_videos = []
 
-        video_with_errors = []
+        videos_with_error = []
 
         for video_url in playlist_video_urls:
 
             try:
                 video = download_video(video_url)
 
-                downloaded_video.append(video)
+                downloaded_videos.append(video)
             except Exception as e:
-                video_with_errors.append(video_url)
+                videos_with_error.append(video_url)
                 continue
 
         return render_template('index.html',
-                               downloaded_video=downloaded_video,
-                               video_with_errors=video_with_errors
+                               downloaded_videos=downloaded_videos,
+                               videos_with_error=videos_with_error
                                )
 
 

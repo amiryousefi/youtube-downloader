@@ -28,9 +28,9 @@
 
     <form action="/playlist" name='playlist' method='post' class='my-2 mx-auto flex flex-col' style='width: 320px;'>
 
-      {% if downloaded_video is defined %}
+      {% if downloaded_videos is defined %}
 
-        {% for video in downloaded_video %}
+        {% for video in downloaded_videos %}
 
           <video width="320" height="240" controls>
             <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
