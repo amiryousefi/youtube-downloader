@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, request, render_template
 from datetime import datetime
-from pytube import YouTube, Playlist
+from pytube import YouTube, Playlist, Channel
 from pytube.exceptions import AgeRestrictedError
 
 app = Flask(__name__)
@@ -60,6 +60,39 @@ def playlist_downloader():
         return render_template('index.html',
                                downloaded_video=downloaded_video,
                                video_with_errors=video_with_errors
+                               )
+
+
+@app.route('/channel', methods=['GET', "POST"])
+def channel_downloader():
+    if request.method == 'GET':
+        return render_template('index.html')
+
+    if request.method == 'POST':
+
+        channel_url = request.form.get('channel_url')
+
+        channel = Channel(channel_url)
+
+        channel_video_urls = channel.video_urls
+
+        downloaded_videos = []
+
+        videos_with_error = []
+
+        for video_url in channel_video_urls:
+
+            try:
+                video = download_video(video_url)
+
+                downloaded_videos.append(video)
+            except Exception as e:
+                videos_with_error.append(video_url)
+                continue
+
+        return render_template('index.html',
+                               downloaded_videos=downloaded_videos,
+                               videos_with_error=videos_with_error
                                )
 
 
